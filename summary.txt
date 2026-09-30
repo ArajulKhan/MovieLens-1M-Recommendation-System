@@ -1,0 +1,27 @@
+MOVIELENS 1M MOVIE RECOMMENDATION SYSTEM
+
+
+Dataset and problem:
+MovieLens 1M is a benchmark movie-rating dataset collected by GroupLens. It contains 1,000,209 ratings from 6,040 users and information for approximately 3,900 movies. The main files are users.dat, movies.dat and ratings.dat. The project addresses movie recommendation: recommending relevant movies using movie information and user-rating behavior.
+
+What was done:
+The data was loaded with pandas using the original :: delimiter. EDA examined rating distribution, user activity, movie popularity and genre frequency. Data cleaning checked missing values, duplicates, invalid ratings and unknown user/movie IDs. Movie genres were engineered into a text feature. TF-IDF vectorization was used for the content-based model. A sparse movie-user rating matrix was mean-centered and normalized for collaborative filtering.
+
+Why these decisions:
+Genres are an available and interpretable movie feature, so they are suitable for content-based recommendations. TF-IDF provides a numerical representation and cosine similarity provides an intuitive similarity measure. Collaborative filtering was added because user behavior can reveal relationships between movies that are not explicitly represented by genres. A popularity model provides a simple baseline.
+
+Implementation:
+Three approaches were implemented: popularity baseline, content-based recommendation and item-based collaborative filtering. Recommendation quality is evaluated with ranking-oriented metrics rather than classification accuracy. A simple leave-one-out evaluation is included for the popularity baseline, while content similarity is evaluated through top-K cosine similarity and example recommendations.
+
+Prototype:
+The notebook saves a complete recommendation artifact as movie_recommender.pkl. The separate movie_recommender_cli.py loads this artifact and lets a user search for a movie and choose content-based, collaborative, or both recommendation methods.
+
+Key findings:
+The approaches use different signals. Popularity favors widely rated movies, content-based recommendations favor similar genres, and collaborative recommendations use collective rating behavior. Therefore, the methods should be interpreted using appropriate metrics rather than a single arbitrary score. The exact numerical results should be copied from the executed notebook.
+
+Limitations:
+The dataset is historical, genre information is relatively simple, and collaborative filtering is affected by sparse interactions and popularity bias. A future hybrid recommender could combine genres, tags, plot descriptions, implicit feedback and learned ranking models.
+
+Sources:
+Kaggle: https://www.kaggle.com/datasets/odedgolden/movielens-1m-dataset
+Official GroupLens: https://grouplens.org/datasets/movielens/1m/
